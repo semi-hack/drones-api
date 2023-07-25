@@ -14,7 +14,7 @@ import { SuccessResponse } from 'src/shared/utils/response.utils';
 
 
 @Controller('v1/drones')
-export class VideoController {
+export class DroneController {
   constructor(private readonly droneService: DroneService) {}
 
   @Post()

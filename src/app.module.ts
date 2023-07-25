@@ -6,6 +6,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { DroneModule } from './components/drone/drone.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
       }),
       inject: [ConfigService],
     }),
+    DroneModule,
   ],
   controllers: [AppController],
   providers: [AppService,
