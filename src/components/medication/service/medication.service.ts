@@ -12,7 +12,7 @@ import { Medication } from '../entities/medication.entity';
 import { CreateMedicationInput } from '../interface/medication.interface';
 
 @Injectable()
-export class DroneService extends RootService<Medication> {
+export class MedicationService extends RootService<Medication> {
   constructor(
     @InjectRepository(Medication)
     private readonly medicationRepo: Repository<Medication>,
@@ -26,5 +26,15 @@ export class DroneService extends RootService<Medication> {
     });
 
     return this.medicationRepo.save(medication);
+  }
+
+  async findByIds(ids: string[]): Promise<Medication[]> {
+    const medications = await this.medicationRepo.findByIds(ids);
+
+    if (medications.length !== ids.length) {
+        throw new NotFoundException('One or more medications not found.')
+    }
+
+    return medications;
   }
 }
