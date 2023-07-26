@@ -1,6 +1,9 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   Req,
@@ -22,7 +25,25 @@ export class DroneController {
     @Req() req: any,
     @Body() body: CreateDroneDto,
   ) {
-    const drone = await this.droneService.create(body);
-    return SuccessResponse('drone added successfully', drone);
+    const result = await this.droneService.create(body);
+    return SuccessResponse('drone added successfully', result);
+  }
+
+  @Get('/health/:id')
+  async fetchBatteryHealth(
+    @Req() req: any,
+    @Param('id', ParseUUIDPipe) id: string,
+  ) {
+    const result = await this.droneService.resolveBatteryLevel(id);
+    return SuccessResponse('successful', { health: result });
+  }
+
+  @Get('/available')
+  async fetchAvailableDrones(
+    @Req() req: any,
+    @Param('id', ParseUUIDPipe) id: string,
+  ) {
+    const result = await this.droneService.findIdleDrones();
+    return SuccessResponse('successful', result);
   }
 }

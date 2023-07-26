@@ -1,4 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
+import { Medication } from '../../medication/entities/medication.entity';
 import {
   BeforeInsert,
   Column,
@@ -6,6 +7,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { DroneModel, DroneState } from '../enum/drone.enum';
 
@@ -30,6 +33,10 @@ export class Drone {
 
   @Column({ type: 'varchar', enum: DroneState, default: DroneState.IDLE })
   state: string;
+
+  @ManyToMany(() => Medication)
+  @JoinTable()
+  medications: Medication[];
 
   @CreateDateColumn({ type: 'date', default: null })
   createdAtDateOnly: Date;
