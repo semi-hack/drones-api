@@ -20,9 +20,4 @@ export class CreateDroneDto {
 
     @IsNumber()
     battery: number;
-
-    @IsEnum(DroneState, {
-        message: `state must be one of ${joinEnumValues(DroneState)}`
-    })
-    state: DroneState;
 }

@@ -5,7 +5,7 @@ export interface CreateDroneInput {
     model: DroneModel;
     weight: number;
     battery: number;
-    state: DroneState;
+    state?: DroneState;
 }
 
 export interface AddMedicationInput {
