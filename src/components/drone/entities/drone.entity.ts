@@ -9,8 +9,10 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { DroneModel, DroneState } from '../enum/drone.enum';
+import { BatteryLog } from '../../battery-log/entities/battery-log.entity';
 
 
 @Entity('drones')
@@ -51,4 +53,7 @@ export class Drone {
   setCreatedAtDateOnly() {
     this.createdAtDateOnly = new Date();
   }
+
+  @OneToMany(() => BatteryLog, batteryLog => batteryLog.drone)
+  batteryLogs: BatteryLog[];
 }

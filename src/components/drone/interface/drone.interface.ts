@@ -7,3 +7,7 @@ export interface CreateDroneInput {
     battery: number;
     state: DroneState;
 }
+
+export interface AddMedicationInput {
+    medications: string[];
+}

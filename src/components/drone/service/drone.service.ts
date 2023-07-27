@@ -33,6 +33,10 @@ export class DroneService extends RootService<Drone> {
     return this.droneRepo.save(drone);
   }
 
+  async find(): Promise<Drone[]> {
+    return this.droneRepo.find({});
+  }
+
   async findIdleDrones(): Promise<Drone[]> {
     return this.droneRepo.find({ where: { state: DroneState.IDLE } });
   }
@@ -43,7 +47,7 @@ export class DroneService extends RootService<Drone> {
     return drone.battery;
   }
 
-  async loadDrone(id: number, medicationIds: string[]): Promise<void> {
+  async loadDrone(id: string, medicationIds: string[]): Promise<Drone> {
     const drone = await this.droneRepo.findOne(id);
     if (!drone) {
       throw new NotFoundException('Drone not found.');
@@ -57,13 +61,13 @@ export class DroneService extends RootService<Drone> {
 
     const totalWeight = medications.reduce((acc, med) => acc + med.weight, 0);
     if (totalWeight > drone.weight) {
-      throw new Error('Total weight of medications exceeds the drone\'s weight limit.');
+      throw new BadRequestException('Total weight of medications exceeds the drone\'s weight limit.');
     }
 
     drone.medications = medications;
     drone.state = 'LOADED';
 
-    await this.droneRepo.save(drone);
+    return this.droneRepo.save(drone);
   }
 
   async getLoadedMedication(id: string): Promise<Medication[]> {
@@ -82,6 +86,10 @@ export class DroneService extends RootService<Drone> {
     const drone = await this.droneRepo.findOne(id);
     if(!drone) {
         throw new NotFoundException('Drone not found.');
+    }
+
+    if (drone.state != DroneState.IDLE) {
+        throw new BadRequestException('Only idle drones can be set to loading')
     }
 
     if (drone.battery < 25) {
