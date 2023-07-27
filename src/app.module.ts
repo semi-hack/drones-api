@@ -7,6 +7,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { DroneModule } from './components/drone/drone.module';
+import { BatteryLogModule } from './components/battery-log/battery-log.module';
+import { MedicationModule } from './components/medication/medication.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { DroneModule } from './components/drone/drone.module';
       inject: [ConfigService],
     }),
     DroneModule,
+    MedicationModule,
+    BatteryLogModule,
   ],
   controllers: [AppController],
   providers: [AppService,
