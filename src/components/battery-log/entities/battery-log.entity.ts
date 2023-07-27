@@ -19,6 +19,9 @@ export class BatteryLog {
   @Column({ type: 'integer' })
   percentage: number;
 
+  @Column({ type: 'uuid'})
+  droneId: string;
+
   @ManyToOne(() => Drone, drone => drone.batteryLogs)
   drone: Drone;
 
