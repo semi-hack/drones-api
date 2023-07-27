@@ -3,7 +3,7 @@
 Techinnover Backend Assessment, Drones Api
 ## Requirements
 
-- Node JS v16+
+- Node JS v18+
 - Docker
 
 ## Environment variables
@@ -22,7 +22,7 @@ The postgres container exposes port `15334` instead of the defualt `5432`. This 
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ## Running the app
@@ -46,7 +46,7 @@ This project uses Typeorm. Before you run the application run pending migrations
   run pending migrations, run the following command:
 
   ```bash
-  $ npm run migrations
+  $ yarn run migrations
   ```
 
 - #### Seeds:
@@ -54,7 +54,7 @@ This project uses Typeorm. Before you run the application run pending migrations
   run pending seeders with the following command:
 
   ```bash
-  $ npm run seeders
+  $ yarn run seeders
   ```
 
 For more information on migrations and seeds, see the `Typeorm` and `typeorm-seeding` docs, respectively.
@@ -63,10 +63,10 @@ For more information on migrations and seeds, see the `Typeorm` and `typeorm-see
 
 ```bash
 # development
-$ npm run start
+$ yarn run start
 
 # watch mode
-$ npm run start:dev
+$ yarn run start:dev
 
 ```
 
@@ -87,17 +87,17 @@ $ npm run start:dev
    When loading the drone, fetch the medication id's using fetch medication endpoint
 
   sample body for adding drone 
-  >** {
+  {
     "serialNumber":"xxxxxxx",
     "model":"LightWeight",
     "weight":500,
     "battery":100
-  } **
+  }
 
   sample body for loading drone
-  >** {
+  {
     "medications": ["c1bed2b9-fac8-463f-950c-61315d9f3e3f", "d86c7ff8-380c-45ef-a4c7-6c54e7766c88"]
-   } **
+  } 
 ```
 ## Test
 
