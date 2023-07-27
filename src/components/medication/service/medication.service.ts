@@ -28,11 +28,15 @@ export class MedicationService extends RootService<Medication> {
     return this.medicationRepo.save(medication);
   }
 
+  async find(): Promise<Medication[]> {
+    return this.medicationRepo.find({});
+  }
+
   async findByIds(ids: string[]): Promise<Medication[]> {
     const medications = await this.medicationRepo.findByIds(ids);
 
     if (medications.length !== ids.length) {
-        throw new NotFoundException('One or more medications not found.')
+      throw new NotFoundException('One or more medications not found.');
     }
 
     return medications;

@@ -1,5 +1,6 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MedicationController } from './controller/medication.controller';
 import { Medication } from './entities/medication.entity';
 import { MedicationService } from './service/medication.service';
 
@@ -9,7 +10,7 @@ import { MedicationService } from './service/medication.service';
     TypeOrmModule.forFeature([Medication]),
   ],
   providers: [MedicationService],
-  controllers: [],
+  controllers: [MedicationController],
   exports: [MedicationService],
 })
 export class MedicationModule {}
