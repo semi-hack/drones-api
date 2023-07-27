@@ -17,7 +17,7 @@ The program currently relies on the following dependencies
 - Postgres
 
 Postgres is provisioned in the `docker-compose.yml` file at the root directory.
-The postgres container exposes port `15334` instead of the defualt `5432`. This is to prevent clashes with any postgres instance that may be running on your machine.
+The postgres container exposes port `15534` instead of the defualt `5432`. This is to prevent clashes with any postgres instance that may be running on your machine.
 
 ## Installation
 
